@@ -1,13 +1,7 @@
 const Joi = require('joi')
 
 const userSchema = Joi.object({
-    first_name: Joi.string()
-        .pattern(/^\d+$/, { invert: true })
-        .min(3)
-        .max(155)
-        .trim(true)
-        .required(),
-    last_name: Joi.string()
+    username: Joi.string()
         .pattern(/^\d+$/, { invert: true })
         .min(3)
         .max(155)

@@ -5,9 +5,9 @@ const UserRoutes = require('../controllers/userController');
 
 router.post('/register', UserRoutes.userRegister);
 router.post('/login', UserRoutes.userLogin);
-router.post('/password/link', UserRoutes.forgotPasswordlink)
+router.get('/forgot-password', UserRoutes.forgotPasswordlink)
 router.post('/logout',verifyToken, UserRoutes.userLogout);
 router.put('/user/update',verifyToken, UserRoutes.updatedUser);
-router.post('/change/password',verifyToken, UserRoutes.forgotPassword);
+router.post('/change-password', UserRoutes.forgotPassword);
 
 module.exports = router;

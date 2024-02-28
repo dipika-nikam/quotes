@@ -6,10 +6,10 @@ exports.handleValidationError = (error, res) => {
             error: true,
             data: {},
         });
-    } else if (error.message.includes('"first_name" with value')) {
+    } else if (error.message.includes('"username" with value')) {
         return res.status(400).send({
             status: 400,
-            message: "Number is not allowed in first name and last name",
+            message: "Number is not allowed in Username",
             error: true,
             data: {},
         });

@@ -13,9 +13,12 @@ const setupSocketListeners = require('./helpers/socketHelper')
 const exphbs  = require('express-handlebars');
 
 
+app.get('/reset-password', (req, res) => {
+    res.render('reset-password');
+});
 
-app.use(express.static(path.join(__dirname, "public")));
-  app.set("views", path.join(__dirname, "public"));
+app.use(express.static(path.join(__dirname, "/")));
+  app.set("views", path.join(__dirname, "public/"));
 
 app.set("view engine", "hbs");
 
@@ -42,7 +45,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 3000;
-app.use('/v1', userRoutes);
+app.use('/api/auth', userRoutes);
 app.use('/v1', qutoesRoutes)
 
 

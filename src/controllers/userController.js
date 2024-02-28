@@ -23,8 +23,7 @@ exports.userRegister = async (req, res) => {
         const hashedPassword = await PasswordValidate.hashPassword(value.password);
         const isAdmin = value.isAdmin || false;
         const user = await User.create({
-            first_name: value.first_name,
-            last_name: value.last_name,
+            username: value.username,
             email: value.email,
             password: hashedPassword,
             isAdmin: isAdmin
@@ -38,6 +37,7 @@ exports.userRegister = async (req, res) => {
             data: newUser,
         });
     } catch (error) {
+        console.log(error);
         return errorHandler.handleValidationError(error, res)
     }
 }
@@ -188,8 +188,9 @@ exports.updatedUser = async (req, res) => {
 
 exports.forgotPasswordlink = async (req, res) => {
     try {
-        const { email } = req.body;
+        const  email  = 'test1@gmail.com';
         const user = await User.findOne({ email });
+        console.log(user);
         if (!user) {
             return res.status(404).send({
                 status: 404,
@@ -224,8 +225,8 @@ exports.forgotPasswordlink = async (req, res) => {
  */
 exports.forgotPassword = async (req, res) => {
     try {
-        const { newpassword, confirmpassword } = req.body;
-        if (newpassword !== confirmpassword) {
+        const { newPassword, confirmPassword } = req.body;
+        if (newPassword !== confirmPassword) {
             return res.status(404).send({
                 status: 404,
                 message: "Your confirm password doesn't match with new password",
@@ -244,7 +245,7 @@ exports.forgotPassword = async (req, res) => {
                 data: {},
             });
         }
-        const hashedNewPassword = await PasswordValidate.hashPassword(newpassword);
+        const hashedNewPassword = await PasswordValidate.hashPassword(newPassword);
         user.password = hashedNewPassword;
         user.token = req.headers.authorization;
         await user.save();
@@ -255,6 +256,7 @@ exports.forgotPassword = async (req, res) => {
             data: {},
         });
     } catch (error) {
+        console.log(error);
         return errorHandler.handleValidationError(error, res)
     }
 }
